@@ -66,7 +66,7 @@ namespace mNetwork
 
         public static CachedMessage GetCachedMessage(int type)
         {
-            return _cachedMessages.FirstOrDefault(p => p.Value.PacketID == type).Value;
+            return _cachedMessages.FirstOrDefault(p => p.Value.PacketId == type).Value;
         }
 
         public static CachedMessage GetCachedMessage(Guid guid)
@@ -95,7 +95,7 @@ namespace mNetwork
                     {
                         Logger.WriteLine("[helper] Add packet: " + type.Name); 
                         var packetId = ((mNetworkPacketAttribute) attrs[0]).PacketID;
-                        var cachedMessage = new CachedMessage() {PacketID = packetId, MessageType = type};
+                        var cachedMessage = new CachedMessage() {PacketId = packetId, MessageType = type};
                         CreateMessageCachedFields(type, cachedMessage);
                         _cachedMessages.Add(type.GUID, cachedMessage);
                     }
@@ -144,7 +144,7 @@ namespace mNetwork
         public class CachedMessage
         {
             public CachedFieldInfo[] CachedFields;
-            public int PacketID;
+            public int PacketId;
             public Type MessageType;
         }
 
@@ -178,7 +178,7 @@ namespace mNetwork
         public static mNetworkMessage Serialize(object anySerializableObject)
         {
             var packer = new mNetworkPacker(anySerializableObject);
-            return new mNetworkMessage() { Type = packer.PacketID, Data = packer.Data };
+            return new mNetworkMessage() { Type = packer.PacketId, Data = packer.Data };
 
             /*
                 using (var memoryStream = new MemoryStream())

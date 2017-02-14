@@ -37,16 +37,21 @@ namespace mNetwork.TCP
             Init();
         }
 
+        public void Start()
+        {
+            _threadWork = true;
+            _listener.Start();
+            _listenerThread.Start();
+        }
+
         private void Init()
         {
             mNetworkHelper.Logger.WriteLine("Create TCP server");
             mNetworkHelper.Logger.WriteLine("Listen on: " + _listener.LocalEndpoint);
 
-            _threadWork = true;
+            _threadWork = false;
             _clients = new Dictionary<Guid, mTcpClient>();
-            _listener.Start();
             _listenerThread = new Thread(Work);
-            _listenerThread.Start();
         }
 
         private void Work()

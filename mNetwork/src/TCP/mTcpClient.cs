@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
@@ -48,6 +49,11 @@ namespace mNetwork.TCP
             mNetworkHelper.Logger.WriteLine($"Connect failed");
             tcpClient.Close();
             return null;
+        }
+
+        public EndPoint LocalEndPoint()
+        {
+            return _client.Client.LocalEndPoint;
         }
 
         private static void ConnectCallback(IAsyncResult ar)

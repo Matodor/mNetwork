@@ -10,7 +10,7 @@ namespace mNetwork
 {
     public class mNetworkPacker
     {
-        public int PacketID { get; }
+        public int PacketId { get; }
         public byte[] Data { get; }
 
         private readonly List<byte> _data;
@@ -33,7 +33,7 @@ namespace mNetwork
                     PackField(cachedMessage.CachedFields[i]);
             }
 
-            PacketID = cachedMessage.PacketID;
+            PacketId = cachedMessage.PacketId;
             Data = _data.ToArray();
         }
 
